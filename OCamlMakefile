@@ -1218,7 +1218,9 @@ define make_subproj
 .PHONY:
 subproj_$(1):
 	$$(eval $$(call PROJ_$(1)))
-	$(QUIET)if [ "$(SUBTARGET)" != "all" ]; then \
+	$(QUIET)if [ "$(SUBTARGET)" = "$(1)" ]; then \
+	  $(MAKE) -f $(OCAMLMAKEFILE) bc; \
+	elif [ "$(SUBTARGET)" != "all" ] && [ "$(findstring $(SUBTARGET),$(SUBPROJS))" = "" ]; then \
 	  $(MAKE) -f $(OCAMLMAKEFILE) $(SUBTARGET); \
 	fi
 endef
