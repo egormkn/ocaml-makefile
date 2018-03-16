@@ -6,19 +6,21 @@ export THREADS = yes
 
 # Define project "ex1"
 define PROJ_ex1
-  SOURCES = ex1.ml
+  SOURCES = example1.ml
   RESULT = ex1
+  TARGET = byte-code
 endef
 export PROJ_ex1
 
 # Define project "ex2"
 define PROJ_ex2
-  SOURCES = ex2.ml
+  SOURCES = example2.ml
   RESULT = ex2
+  TARGET = byte-code
 endef
 export PROJ_ex2
 
-# If the environment does not define subprojects to handle,
+# If the environment or make target does not define subprojects to handle,
 # then use "ex1 ex2" as default
 ifndef SUBPROJS
   export SUBPROJS = ex1 ex2
