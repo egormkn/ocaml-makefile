@@ -318,6 +318,7 @@ etc.  E.g.:
 define PROJ_p1
   SOURCES=foo.ml main.ml
   RESULT="p1"
+  TARGET=byte-code
   OCAMLFLAGS="-unsafe"
 endef
 export PROJ_p1
@@ -363,6 +364,8 @@ been defined appropriately):
 
   %:
           @make -f $(OCAMLMAKEFILE) subprojs SUBTARGET=$@
+
+After that use `make p1` to build project `p1` and `make` to build both of them.
 
 See the `threads`-directory in the distribution for a short example!
 
