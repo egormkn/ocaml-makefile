@@ -43,6 +43,11 @@ ifndef TOPSUFFIX
 endif
 export TOPSUFFIX
 
+ifndef TARGET
+  TARGET := byte-code
+endif
+export TARGET
+
 # Eventually set include- and library-paths, libraries to link,
 # additional compilation-, link- and ocamlyacc-flags
 # Path- and library information needs not be written with "-I" and such...
@@ -756,6 +761,9 @@ endif
 # Call "OCamlMakefile QUIET=" to get rid of all of the @'s.
 QUIET=@
 
+# Default rule
+all:	$(TARGET)
+
 # generates byte-code (default)
 byte-code:		$(PRE_TARGETS)
 			$(QUIET)$(MAKE) -r -f $(OCAMLMAKEFILE) $(BCRESULT) \
@@ -1219,7 +1227,7 @@ define make_subproj
 subproj_$(1):
 	$$(eval $$(call PROJ_$(1)))
 	$(QUIET)if [ "$(SUBTARGET)" = "$(1)" ]; then \
-	  $(MAKE) -f $(OCAMLMAKEFILE) bc; \
+	  $(MAKE) -f $(OCAMLMAKEFILE) $$(TARGET); \
 	elif [ "$(SUBTARGET)" != "all" ] && [ "$(findstring $(SUBTARGET),$(SUBPROJS))" = "" ]; then \
 	  $(MAKE) -f $(OCAMLMAKEFILE) $(SUBTARGET); \
 	fi
